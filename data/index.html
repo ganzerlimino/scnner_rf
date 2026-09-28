@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12140f">
+  <title>RF-Tracker</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">ESP32 · CC1101</p>
+      <h1 data-i18n="app.title">RF-Tracker</h1>
+      <p class="sub" data-i18n="app.subtitle">Receive-only 433 / 868 MHz logger</p>
+    </div>
+    <label class="lang">
+      <span data-i18n="lang.label">Language</span>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="it">Italiano</option>
+      </select>
+    </label>
+  </header>
+
+  <p class="banner" data-i18n="app.receive_only">This firmware only receives. It does not transmit.</p>
+  <p id="notice" class="notice" hidden></p>
+
+  <section>
+    <h2 data-i18n="section.status">Status</h2>
+    <div id="status" class="cards"></div>
+  </section>
+
+  <section>
+    <h2 data-i18n="section.live">Live packets</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="live.time">UTC time</th>
+            <th data-i18n="live.band">Band</th>
+            <th data-i18n="live.rssi">RSSI</th>
+            <th data-i18n="live.length">Bytes</th>
+            <th data-i18n="live.coords">Position</th>
+            <th data-i18n="live.payload">Payload</th>
+          </tr>
+        </thead>
+        <tbody id="packets"></tbody>
+      </table>
+    </div>
+    <p id="packets-empty" class="muted" data-i18n="live.empty">No packets yet.</p>
+  </section>
+
+  <form id="config-form">
+    <section>
+      <h2 data-i18n="section.radios">Radios</h2>
+      <p class="muted" data-i18n="radio.hint"></p>
+      <div id="radios"></div>
+    </section>
+
+    <section>
+      <h2 data-i18n="section.system">System</h2>
+      <p class="muted" data-i18n="system.wifi_hint"></p>
+      <div class="grid">
+        <label data-i18n="system.mode"></label>
+        <select id="wifi-mode" name="wifi.mode">
+          <option value="ap" data-i18n="system.mode_ap">Access point</option>
+          <option value="apsta" data-i18n="system.mode_apsta">Access point + station</option>
+        </select>
+        <label data-i18n="system.ap_ssid" for="ap-ssid"></label>
+        <input id="ap-ssid" name="wifi.ap_ssid" maxlength="32" required>
+        <label data-i18n="system.ap_password" for="ap-password"></label>
+        <input id="ap-password" name="wifi.ap_password" maxlength="63">
+        <label data-i18n="system.hostname" for="hostname"></label>
+        <input id="hostname" name="wifi.hostname" maxlength="31" required>
+        <label data-i18n="system.ap_ip" for="ap-ip"></label>
+        <input id="ap-ip" name="wifi.ap_ip" maxlength="15" required>
+        <label data-i18n="system.channel" for="channel"></label>
+        <input id="channel" name="wifi.ap_channel" type="number" min="1" max="13" required>
+        <label data-i18n="system.clients" for="max-clients"></label>
+        <input id="max-clients" name="wifi.ap_max_clients" type="number" min="1" max="8" required>
+        <label data-i18n="system.sta_ssid" for="sta-ssid"></label>
+        <input id="sta-ssid" name="wifi.sta_ssid" maxlength="32">
+        <label data-i18n="system.sta_password" for="sta-password"></label>
+        <input id="sta-password" name="wifi.sta_password" maxlength="63">
+        <label data-i18n="system.token" for="api-token"></label>
+        <input id="api-token" name="api_token" maxlength="32" autocomplete="off">
+        <p class="hint" data-i18n="system.token_hint"></p>
+        <label class="check"><input id="gps-enabled" name="gps.enabled" type="checkbox"><span data-i18n="system.gps"></span></label>
+        <label data-i18n="system.gps_baud" for="gps-baud"></label>
+        <select id="gps-baud" name="gps.baud">
+          <option>4800</option><option>9600</option><option>19200</option>
+          <option>38400</option><option>57600</option><option>115200</option>
+        </select>
+        <label class="check"><input id="oled-enabled" name="oled.enabled" type="checkbox"><span data-i18n="system.oled"></span></label>
+        <label data-i18n="system.oled_addr" for="oled-addr"></label>
+        <input id="oled-addr" name="oled.i2c_address" type="number" min="8" max="119" placeholder="60">
+        <label data-i18n="system.refresh" for="refresh"></label>
+        <input id="refresh" name="oled.refresh_ms" type="number" min="500" max="10000">
+        <label class="check"><input id="sd-enabled" name="storage.enabled" type="checkbox"><span data-i18n="system.sd"></span></label>
+        <label data-i18n="system.prefix" for="prefix"></label>
+        <input id="prefix" name="storage.log_prefix" maxlength="12" required>
+        <label class="check"><input id="crc-column" name="storage.include_crc_column" type="checkbox"><span data-i18n="system.crc"></span></label>
+        <label data-i18n="system.queue" for="queue"></label>
+        <input id="queue" name="storage.queue_depth" type="number" min="4" max="64">
+        <label data-i18n="system.flush" for="flush"></label>
+        <input id="flush" name="storage.flush_every" type="number" min="1" max="20">
+        <label data-i18n="system.cs" for="sd-cs"></label>
+        <input id="sd-cs" name="storage.cs_pin" type="number" min="0" max="33">
+        <label class="check"><input id="serial-packets" name="debug.serial_packets" type="checkbox"><span data-i18n="system.serial"></span></label>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button type="submit" data-i18n="action.save">Save</button>
+      <button type="button" id="reboot" data-i18n="action.reboot">Reboot</button>
+    </div>
+  </form>
+
+  <section>
+    <div class="row">
+      <h2 data-i18n="section.logs">SD logs</h2>
+      <button type="button" id="reload-logs" data-i18n="action.refresh">Refresh logs</button>
+    </div>
+    <ul id="logs" class="logs"></ul>
+  </section>
+
+  <footer>
+    <span data-i18n="footer.version">Firmware</span>
+    <span id="version">0.1.0</span>
+  </footer>
+  <script src="/app.js"></script>
+  <noscript>
+    <p>JavaScript is required. / JavaScript è necessario.</p>
+  </noscript>
+</body>
+</html>
