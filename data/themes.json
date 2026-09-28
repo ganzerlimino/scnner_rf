@@ -1,0 +1,84 @@
+{
+  "themes": [
+    {
+      "id": "field",
+      "color_scheme": "dark",
+      "colors": {
+        "bg": "#12140f",
+        "card": "#1c2118",
+        "line": "#3a4032",
+        "ink": "#ece7d8",
+        "muted": "#b3ad9b",
+        "accent": "#e2a23a",
+        "ok": "#9cbf73",
+        "bad": "#d4654f",
+        "on_accent": "#1a1408",
+        "field": "#10130e"
+      }
+    },
+    {
+      "id": "night",
+      "color_scheme": "dark",
+      "colors": {
+        "bg": "#0e141c",
+        "card": "#172230",
+        "line": "#314056",
+        "ink": "#e6eef6",
+        "muted": "#9aadc0",
+        "accent": "#5eb6d4",
+        "ok": "#7dcea0",
+        "bad": "#e07a6a",
+        "on_accent": "#07141a",
+        "field": "#0c1218"
+      }
+    },
+    {
+      "id": "paper",
+      "color_scheme": "light",
+      "colors": {
+        "bg": "#f3efe4",
+        "card": "#fffdf8",
+        "line": "#d3cbbd",
+        "ink": "#1c2118",
+        "muted": "#5e6758",
+        "accent": "#9a4318",
+        "ok": "#2d6a3a",
+        "bad": "#a33b2b",
+        "on_accent": "#fff8f3",
+        "field": "#fffdf8"
+      }
+    },
+    {
+      "id": "olive",
+      "color_scheme": "dark",
+      "colors": {
+        "bg": "#141c12",
+        "card": "#1e2a18",
+        "line": "#3c4e30",
+        "ink": "#e8f0dc",
+        "muted": "#a9b89a",
+        "accent": "#c4d06a",
+        "ok": "#9cbf73",
+        "bad": "#d46a52",
+        "on_accent": "#161a0c",
+        "field": "#10160e"
+      }
+    },
+    {
+      "id": "signal",
+      "color_scheme": "dark",
+      "colors": {
+        "bg": "#10110e",
+        "card": "#1c1e16",
+        "line": "#3a3d30",
+        "ink": "#f2f5e8",
+        "muted": "#b4b9a4",
+        "accent": "#d2e15a",
+        "ok": "#8fd18a",
+        "bad": "#e07a68",
+        "on_accent": "#16180c",
+        "field": "#0c0d0a"
+      }
+    }
+  ]
+}

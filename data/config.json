@@ -1,0 +1,77 @@
+{
+  "_readme_en": "Runtime configuration. Keys stay in English. Unknown keys are ignored. See docs/configuration.md.",
+  "_readme_it": "Configurazione di runtime. Le chiavi restano in inglese. Le chiavi sconosciute sono ignorate. Vedi docs/configuration.it.md.",
+  "schema": 1,
+  "language": "en",
+  "ui": {
+    "theme": "field"
+  },
+  "api_token": "",
+  "wifi": {
+    "mode": "ap",
+    "ap_ssid": "RF-Tracker",
+    "ap_password": "change-me",
+    "hostname": "rf-tracker",
+    "ap_ip": "192.168.4.1",
+    "ap_channel": 6,
+    "ap_max_clients": 4,
+    "sta_ssid": "",
+    "sta_password": ""
+  },
+  "gps": {
+    "enabled": true,
+    "baud": 9600
+  },
+  "oled": {
+    "enabled": true,
+    "i2c_address": 60,
+    "refresh_ms": 2000
+  },
+  "storage": {
+    "enabled": true,
+    "log_prefix": "rf_log",
+    "include_crc_column": false,
+    "queue_depth": 32,
+    "flush_every": 1,
+    "cs_pin": 15
+  },
+  "debug": {
+    "serial_packets": true
+  },
+  "radios": [
+    {
+      "enabled": true,
+      "id": "433",
+      "frequency_mhz": "433.92",
+      "freq_min_mhz": "433.05",
+      "freq_max_mhz": "434.79",
+      "bitrate_kbps": "4.80",
+      "deviation_khz": "5.00",
+      "rx_bandwidth_khz": "135.00",
+      "preamble_bits": 16,
+      "sync_word": "D391",
+      "variable_length": true,
+      "fixed_length": 16,
+      "cs_pin": 5,
+      "gdo0_pin": 25,
+      "gdo2_pin": -1
+    },
+    {
+      "enabled": true,
+      "id": "868",
+      "frequency_mhz": "868.30",
+      "freq_min_mhz": "863.00",
+      "freq_max_mhz": "870.00",
+      "bitrate_kbps": "4.80",
+      "deviation_khz": "5.00",
+      "rx_bandwidth_khz": "135.00",
+      "preamble_bits": 16,
+      "sync_word": "D391",
+      "variable_length": true,
+      "fixed_length": 16,
+      "cs_pin": 4,
+      "gdo0_pin": 26,
+      "gdo2_pin": -1
+    }
+  ]
+}
