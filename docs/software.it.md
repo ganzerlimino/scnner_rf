@@ -39,7 +39,7 @@ I body sono JSON. Le route che modificano qualcosa controllano `X-Api-Token` qua
 | DELETE | `/api/logs?name=` | Cancella un CSV |
 | POST | `/api/system/reboot` | Riavvia dopo la risposta |
 
-`POST /api/config` risponde `reboot_required` quando cambiano Wi-Fi, indirizzo OLED, profondità della coda o un pin. Frequenza, modem e baud del GPS li applicano i rispettivi task senza riavvio.
+`POST /api/config` risponde `reboot_required` quando cambiano Wi-Fi, indirizzo OLED, profondità della coda o un pin. Frequenza, modem, baud del GPS e tema dell'interfaccia valgono senza riavvio.
 
 Le chiavi JSON sconosciute sono ignorate. Le chiavi assenti tengono il default interno, quindi un file piccolo può sovrascrivere una sola radio.
 

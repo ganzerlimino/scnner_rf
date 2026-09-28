@@ -10,6 +10,7 @@
 | --- | --- | --- |
 | `schema` | `1` | Versione del documento. Il loader accetta comunque le chiavi note se questo numero cambia. |
 | `language` | `en` | `en` o `it`. Lingua dell'interfaccia. |
+| `ui.theme` | `field` | Id di una combinazione in `data/themes.json`. Vale appena la pagina si carica. Da 1 a 15 caratteri: una lettera minuscola, poi lettere, cifre, `_` o `-`. |
 | `api_token` | vuoto | Se impostato, `POST` e `DELETE` richiedono l'header `X-Api-Token`. |
 
 ## `wifi`
@@ -66,3 +67,19 @@ Due voci: indice 0 = riferimento 433 MHz, indice 1 = riferimento 868 MHz. `kMaxR
 I pin devono essere unici, tra 0 e 33, e non GPIO 6–11 né un pin di bus condiviso in `board_config.h`.
 
 Un CC1101 in modo pacchetto consegna solo le trame la cui frequenza, bit rate, deviazione e sync word coincidono. Punta quei quattro valori al protocollo che vuoi studiare. Questa build non spazza la banda e non trasmette.
+
+## Aspetto
+
+Le combinazioni incluse sono `field` (carbone e ambra), `night` (blu e ciano), `paper` (chiara), `olive` (verde) e `signal` (nero e lime). I colori stanno in `data/themes.json`, non nel firmware. La configurazione memorizza solo l'id in `ui.theme`.
+
+Nella pagina, **Aspetto** applica la combinazione subito. **Salva** scrive quell'id insieme al resto. Non serve riavviare.
+
+## Esporta e importa
+
+**Esporta configurazione** scarica il modulo, compresa una modifica non ancora salvata, come `rf-tracker-config.json`. **Importa configurazione** rilegge un JSON nel modulo. **Salva** lo scrive in `/config.json` su LittleFS. L'import da solo non scrive, così puoi controllare i valori prima.
+
+Il file è lo stesso documento di `data/config.json`. Le chiavi restano in inglese. Servono un oggetto `wifi` e un array `radios`; le altre chiavi note sono facoltative e tornano ai default. Le chiavi sconosciute sono ignorate. `_readme_en` e `_readme_it` possono esserci e vengono ignorati.
+
+Per caricare un file senza la pagina, sostituisci `data/config.json` e lancia `pio run -e esp32dev -t uploadfs`, oppure copialo in `/config.json` su LittleFS. Un file non valido viene rifiutato e resta la configurazione precedente.
+
+Come aggiungere una combinazione è descritto in [extending.it.md](extending.it.md).

@@ -39,7 +39,7 @@ All bodies are JSON. Mutating routes check `X-Api-Token` when `api_token` is not
 | DELETE | `/api/logs?name=` | Delete one CSV |
 | POST | `/api/system/reboot` | Restart after the response is sent |
 
-`POST /api/config` answers `reboot_required` when Wi-Fi, the OLED address, the queue depth or any pin changed. Frequency, modem and GPS baud are applied by their tasks without a reboot.
+`POST /api/config` answers `reboot_required` when Wi-Fi, the OLED address, the queue depth or any pin changed. Frequency, modem, GPS baud and the UI theme apply without a reboot.
 
 Unknown JSON keys are ignored. Missing keys keep the built-in default, so a small file can override one radio.
 

@@ -105,6 +105,22 @@ bool textOk(const char* value, size_t maxLen, bool allowEmpty) {
   return true;
 }
 
+bool themeIdOk(const char* value) {
+  if (value == nullptr || value[0] == '\0' || strlen(value) > 15) {
+    return false;
+  }
+  if (value[0] < 'a' || value[0] > 'z') {
+    return false;
+  }
+  for (const char* p = value; *p != '\0'; ++p) {
+    const bool ok = (*p >= 'a' && *p <= 'z') || (*p >= '0' && *p <= '9') || *p == '_' || *p == '-';
+    if (!ok) {
+      return false;
+    }
+  }
+  return true;
+}
+
 bool prefixOk(const char* value) {
   if (value == nullptr || value[0] == '\0' || strlen(value) > 12) {
     return false;
@@ -217,6 +233,7 @@ AppConfig defaultAppConfig() {
   AppConfig config{};
   config.schema = 1;
   copyText(config.language, sizeof(config.language), "en");
+  copyText(config.theme, sizeof(config.theme), "field");
   config.api_token[0] = '\0';
   copyText(config.wifi.mode, sizeof(config.wifi.mode), "ap");
   copyText(config.wifi.ap_ssid, sizeof(config.wifi.ap_ssid), "RF-Tracker");
@@ -252,6 +269,7 @@ bool configToJson(const AppConfig& config, char* out, size_t outLen) {
       "Configurazione di runtime. Le chiavi restano in inglese. Le chiavi sconosciute sono ignorate. Vedi docs/configuration.it.md.";
   doc["schema"] = config.schema;
   doc["language"] = config.language;
+  doc["ui"]["theme"] = config.theme;
   doc["api_token"] = config.api_token;
 
   JsonObject wifi = doc["wifi"].to<JsonObject>();
@@ -307,6 +325,10 @@ bool applyConfigJson(const char* json, AppConfig& config, char* err, size_t errL
   }
   if (doc["api_token"].is<const char*>()) {
     copyText(config.api_token, sizeof(config.api_token), doc["api_token"].as<const char*>());
+  }
+  JsonObjectConst ui = doc["ui"];
+  if (!ui.isNull() && ui["theme"].is<const char*>()) {
+    copyText(config.theme, sizeof(config.theme), ui["theme"].as<const char*>());
   }
   JsonObjectConst wifi = doc["wifi"];
   if (!wifi.isNull()) {
@@ -385,6 +407,10 @@ bool applyConfigJson(const char* json, AppConfig& config, char* err, size_t errL
 bool validateAppConfig(const AppConfig& config, char* err, size_t errLen) {
   if (strcmp(config.language, "en") != 0 && strcmp(config.language, "it") != 0) {
     snprintf(err, errLen, "invalid_language");
+    return false;
+  }
+  if (!themeIdOk(config.theme)) {
+    snprintf(err, errLen, "invalid_theme");
     return false;
   }
   if (!textOk(config.api_token, 32, true) || !textOk(config.wifi.ap_ssid, 32, false) ||

@@ -3,6 +3,9 @@
   "_readme_it": "Configurazione di runtime. Le chiavi restano in inglese. Le chiavi sconosciute sono ignorate. Vedi docs/configuration.it.md.",
   "schema": 1,
   "language": "en",
+  "ui": {
+    "theme": "field"
+  },
   "api_token": "",
   "wifi": {
     "mode": "ap",

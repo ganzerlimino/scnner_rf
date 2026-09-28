@@ -47,6 +47,7 @@ I CSV si chiamano `rf_log_YYYYMMDD.csv`. Si scaricano dall'interfaccia. I nomi c
 | Spostare SCK / MOSI / MISO / I2C / UART del GPS | `include/board_config.h` |
 | Spostare CS, GDO, frequenza, modem, Wi-Fi | `data/config.json` o l'interfaccia |
 | Cambiare un'etichetta a schermo | `data/locales/en.json` e `data/locales/it.json` |
+| Cambiare i colori, o aggiungere una combinazione | `data/themes.json`, poi Aspetto nella pagina. Vedi [docs/extending.it.md](docs/extending.it.md) |
 | Aggiungere una terza radio o un altro display | [docs/extending.it.md](docs/extending.it.md) |
 
 Altri dettagli: [docs/software.it.md](docs/software.it.md), [docs/configuration.it.md](docs/configuration.it.md), [docs/bringup.it.md](docs/bringup.it.md).

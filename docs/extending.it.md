@@ -27,6 +27,36 @@ L'interfaccia web scorre già `config.radios`.
 
 `partitions.csv` usa uno slot applicazione da 1,75 MB così l'interfaccia ha circa 2,2 MB. L'immagine attuale è circa 995 KB. Per aggiungere uno slot OTA riduci `littlefs` e aggiungi `app1`, poi imposta `board_upload.flash_size` solo se il modulo non è da 4 MB. I file web devono entrare nello spazio che resta.
 
+## Un'altra combinazione di colori
+
+Le combinazioni sono dati, in `data/themes.json`. Il firmware memorizza solo `ui.theme`.
+
+1. Aggiungi un oggetto all'array `themes`. `id` segue la regola in [configuration.it.md](configuration.it.md) (minuscolo, da 1 a 15 caratteri). `color_scheme` è `dark` o `light`.
+2. Imposta i dieci colori come `#rrggbb`: `bg`, `card`, `line`, `ink`, `muted`, `accent`, `ok`, `bad`, `on_accent`, `field`. `on_accent` è il testo sui pulsanti pieni. `field` è lo sfondo dei campi.
+3. Aggiungi `theme.<id>` in `data/locales/en.json` e `data/locales/it.json`. Se la chiave manca, il pulsante mostra la chiave grezza.
+4. Lancia `pio run -e esp32dev -t uploadfs`. Nessuna modifica C++ e nessun riavvio. Scegli la combinazione in Aspetto, poi Salva.
+
+```json
+{
+  "id": "harbor",
+  "color_scheme": "dark",
+  "colors": {
+    "bg": "#101816",
+    "card": "#182420",
+    "line": "#2e4038",
+    "ink": "#e7f2ec",
+    "muted": "#9db5aa",
+    "accent": "#d7a15a",
+    "ok": "#8fbf8a",
+    "bad": "#d46a52",
+    "on_accent": "#1a1408",
+    "field": "#0c1412"
+  }
+}
+```
+
+Esportare e importare tutta la configurazione, `ui.theme` compreso, sono i pulsanti in Aspetto. Vedi [configuration.it.md](configuration.it.md).
+
 ## Un'altra lingua
 
 Copia `data/locales/en.json` in `data/locales/<codice>.json` con le stesse chiavi. Consenti il codice in `validateAppConfig()` (oggi `language` è `en` o `it`) e aggiungi un `<option>` in `data/index.html`.

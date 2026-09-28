@@ -47,6 +47,7 @@ CSV files are named `rf_log_YYYYMMDD.csv`. Download them from the web UI. Column
 | Move SCK / MOSI / MISO / I2C / GPS UART | `include/board_config.h` |
 | Move CS, GDO, frequency, modem, Wi-Fi | `data/config.json` or the web UI |
 | Change a screen label | `data/locales/en.json` and `data/locales/it.json` |
+| Change colours, or add a palette | `data/themes.json`, then Appearance on the page. See [docs/extending.md](docs/extending.md) |
 | Add a third radio or another display controller | [docs/extending.md](docs/extending.md) |
 
 More detail: [docs/software.md](docs/software.md), [docs/configuration.md](docs/configuration.md), [docs/bringup.md](docs/bringup.md).

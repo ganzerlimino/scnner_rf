@@ -51,6 +51,20 @@
     <p id="packets-empty" class="muted" data-i18n="live.empty">No packets yet.</p>
   </section>
 
+  <section>
+    <h2 data-i18n="section.appearance">Appearance</h2>
+    <p class="muted" data-i18n="theme.hint"></p>
+    <div id="themes" class="themes"></div>
+    <div class="actions">
+      <button type="button" id="export-config" class="ghost" data-i18n="action.export">Export configuration</button>
+      <label class="ghost file-button">
+        <span data-i18n="action.import">Import configuration</span>
+        <input id="import-config" type="file" accept="application/json,.json">
+      </label>
+    </div>
+    <p class="muted" data-i18n="theme.file_hint"></p>
+  </section>
+
   <form id="config-form">
     <section>
       <h2 data-i18n="section.radios">Radios</h2>

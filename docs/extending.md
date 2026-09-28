@@ -27,6 +27,36 @@ The web UI already loops over `config.radios`.
 
 `partitions.csv` uses one 1.75 MB app slot so the web UI can have about 2.2 MB. The current image is about 995 KB. To add an OTA slot, shrink `littlefs` and add `app1`, then set `board_upload.flash_size` only if the module is not 4 MB. The web files have to fit in what remains.
 
+## Another colour palette
+
+Palettes are data, in `data/themes.json`. The firmware stores only `ui.theme`.
+
+1. Add an object to the `themes` array. `id` must match the rule in [configuration.md](configuration.md) (lowercase, 1–15 characters). `color_scheme` is `dark` or `light`.
+2. Set the ten colours as `#rrggbb`: `bg`, `card`, `line`, `ink`, `muted`, `accent`, `ok`, `bad`, `on_accent`, `field`. `on_accent` is the text on the amber-style buttons. `field` is the background of inputs.
+3. Add `theme.<id>` to `data/locales/en.json` and `data/locales/it.json`. If the key is missing, the button shows the raw key.
+4. Run `pio run -e esp32dev -t uploadfs`. No C++ change and no reboot. Pick the new palette under Appearance, then Save.
+
+```json
+{
+  "id": "harbor",
+  "color_scheme": "dark",
+  "colors": {
+    "bg": "#101816",
+    "card": "#182420",
+    "line": "#2e4038",
+    "ink": "#e7f2ec",
+    "muted": "#9db5aa",
+    "accent": "#d7a15a",
+    "ok": "#8fbf8a",
+    "bad": "#d46a52",
+    "on_accent": "#1a1408",
+    "field": "#0c1412"
+  }
+}
+```
+
+Export and import of the whole configuration, including `ui.theme`, are the Appearance buttons. See [configuration.md](configuration.md).
+
 ## Another language
 
 Copy `data/locales/en.json` to `data/locales/<code>.json` with the same keys. Allow the code in `validateAppConfig()` (`language` is `en` or `it` today) and add an `<option>` in `data/index.html`.

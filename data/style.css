@@ -5,9 +5,11 @@
   --line: #3a4032;
   --ink: #ece7d8;
   --muted: #b3ad9b;
-  --amber: #e2a23a;
+  --accent: #e2a23a;
   --ok: #9cbf73;
   --bad: #d4654f;
+  --on-accent: #1a1408;
+  --field: #10130e;
   --font: "Segoe UI", "Helvetica Neue", sans-serif;
   --mono: "ui-monospace", "SFMono-Regular", Consolas, monospace;
 }
@@ -37,7 +39,7 @@ h2 { margin: 0 0 0.6rem; font-size: 1.15rem; }
 
 .eyebrow {
   margin: 0;
-  color: var(--amber);
+  color: var(--accent);
   font-family: var(--mono);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
@@ -51,7 +53,7 @@ h2 { margin: 0 0 0.6rem; font-size: 1.15rem; }
 
 .banner, .notice {
   border: 1px solid var(--line);
-  border-left: 4px solid var(--amber);
+  border-left: 4px solid var(--accent);
   background: var(--card);
   padding: 0.7rem 0.9rem;
 }
@@ -101,18 +103,58 @@ label { color: var(--muted); font-size: 0.9rem; }
 input, select, button {
   font: inherit;
   color: var(--ink);
-  background: #10130e;
+  background: var(--field);
   border: 1px solid var(--line);
   border-radius: 2px;
   padding: 0.45rem 0.55rem;
 }
 
 button {
-  background: var(--amber);
-  color: #1a1408;
-  border-color: var(--amber);
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
   font-weight: 700;
   cursor: pointer;
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 0.6rem;
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-weight: 650;
+  text-align: left;
+}
+
+.theme-option.selected {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.swatch { display: flex; gap: 0.3rem; }
+.swatch i {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 1px solid var(--line);
+}
+
+.file-button { position: relative; cursor: pointer; }
+.file-button input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  opacity: 0;
 }
 
 .ghost {

@@ -40,6 +40,8 @@ struct AppConfig {
   uint16_t schema;
   char language[3];
   char api_token[33];
+  // Palette id from data/themes.json. The page applies it; the firmware only stores it.
+  char theme[16];
   struct {
     char mode[8];  // "ap" or "apsta"
     char ap_ssid[33];
