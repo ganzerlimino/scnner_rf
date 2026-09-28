@@ -1,0 +1,8 @@
+.pio/
+.vscode/
+.idea/
+*.bin
+*.elf
+*.map
+.DS_Store
+test/test_csv_format
