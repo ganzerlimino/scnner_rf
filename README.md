@@ -6,7 +6,7 @@ The firmware does not transmit. Carrier, bit rate, deviation, bandwidth and sync
 
 ## Hardware
 
-Reference wiring is in [docs/hardware.md](docs/hardware.md). Shared bus pins live in `include/board_config.h`. Chip-select, GDO and radio settings live in `data/config.json` and can be changed from the web UI.
+Reference wiring, including the supply capacitors, is in [docs/hardware.md](docs/hardware.md). Shared bus pins live in `include/board_config.h`. Chip-select, GDO and radio settings live in `data/config.json` and can be changed from the web UI.
 
 ## Build
 

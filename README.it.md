@@ -6,7 +6,7 @@ Il firmware non trasmette. Portante, bit rate, deviazione, banda e sync word si 
 
 ## Hardware
 
-I collegamenti di riferimento sono in [docs/hardware.it.md](docs/hardware.it.md). I pin dei bus condivisi stanno in `include/board_config.h`. Chip-select, GDO e parametri radio stanno in `data/config.json` e si cambiano anche dall'interfaccia web.
+I collegamenti di riferimento, condensatori compresi, sono in [docs/hardware.it.md](docs/hardware.it.md). I pin dei bus condivisi stanno in `include/board_config.h`. Chip-select, GDO e parametri radio stanno in `data/config.json` e si cambiano anche dall'interfaccia web.
 
 ## Compilazione
 

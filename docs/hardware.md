@@ -4,6 +4,10 @@ Reference board: ESP32 Dev Module, two CC1101 modules (one 433 MHz, one 868 MHz)
 
 All logic is 3.3 V. Put a 100 nF ceramic capacitor and a 10 µF electrolytic capacitor in parallel between VCC and GND of each CC1101, close to the module. Wi-Fi transmit current makes the 3.3 V rail dip, and a CC1101 with a sagging supply corrupts the FIFO.
 
+![Board wiring, including the supply capacitors](images/collegamenti.png)
+
+The drawing is logical and the labels are in Italian. On a DevKit the physical pin order changes between clones, so follow the GPIO names on the silkscreen. The 10 µF positive lead faces VCC. The three blue wires (GPIO 18, 19 and 23) are shared by both CC1101 modules; CSN and GDO0 are not. GDO2 stays open.
+
 The 433 MHz and 868 MHz modules are different matching networks. Keep each module inside the band in its `freq_min_mhz` / `freq_max_mhz` settings. Swapping the two modules does not make a 433 MHz board receive 868 MHz.
 
 ## Why the buses are split

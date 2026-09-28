@@ -4,6 +4,10 @@ Scheda di riferimento: ESP32 Dev Module, due moduli CC1101 (uno a 433 MHz, uno a
 
 Tutta la logica è a 3,3 V. Metti un condensatore ceramico da 100 nF e uno elettrolitico da 10 µF in parallelo tra VCC e GND di ogni CC1101, vicini al modulo. I picchi del Wi-Fi fanno calare i 3,3 V e un CC1101 alimentato male corrompe la FIFO.
 
+![Collegamento delle schede, condensatori compresi](images/collegamenti.png)
+
+Lo schema è logico: sulle DevKit l'ordine fisico dei pin cambia da un clone all'altro, quindi segui i nomi GPIO sulla serigrafia. Il positivo del 10 µF guarda VCC. I tre fili blu (GPIO 18, 19 e 23) sono condivisi dai due CC1101; CSN e GDO0 no. GDO2 resta libero.
+
 I moduli 433 MHz e 868 MHz hanno reti di adattamento diverse. Tieni ciascuno dentro la banda indicata da `freq_min_mhz` / `freq_max_mhz`. Scambiare i due moduli non fa ricevere gli 868 MHz a una scheda da 433.
 
 ## Perché i bus sono separati
